@@ -8,30 +8,21 @@ const movieRecommendation = async (req, res) => {
 
   const prompt = `I need a movie recommendation based on these movies : ${moviesString}. Provide me with 10 suggestions! seperate each movie with a comma`;
 
-  // console.log(prompt);
-
   const configuration = new Configuration({
     apiKey: process.env.OPENAI_API_KEY,
   });
   const openai = new OpenAIApi(configuration);
 
-  try {
-    const completion = await openai.createCompletion({
-      model: "text-davinci-003",
-      prompt: prompt,
-      max_tokens: 100,
-    });
+  const completion = await openai.createCompletion({
+    model: "text-davinci-003",
+    prompt: prompt,
+    max_tokens: 100,
+  });
 
-    res.status(200).json({
-      suggestions: completion.data.choices[0].text,
-    });
-  } catch (e) {
-    res.status(400).json({
-      status: "failed",
-      message: "Could not get recommendations",
-    });
-    return;
-  }
+  res.status(200).json({
+    suggestions: completion.data.choices[0].text,
+  });
+
 };
 
 module.exports = movieRecommendation;

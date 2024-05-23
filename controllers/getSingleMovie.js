@@ -3,22 +3,14 @@ const mongoose = require("mongoose");
 const getSingleMovie = async (req, res) => {
   const moviesModel = mongoose.model("movies");
 
-  try {
-    const moviesData = await moviesModel.findOne({
-      _id: req.params.movie_id,
-    });
+  const moviesData = await moviesModel.findOne({
+    _id: req.params.movie_id,
+  });
 
-    res.status(200).json({
-      status: "success",
-      data: moviesData,
-    });
-  } catch (e) {
-    res.status(400).json({
-      status: "failed",
-      message: e.message,
-    });
-    return;
-  }
+  res.status(200).json({
+    status: "success",
+    data: moviesData,
+  });
 };
 
 module.exports = getSingleMovie;

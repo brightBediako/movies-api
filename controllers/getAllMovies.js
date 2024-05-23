@@ -2,21 +2,12 @@ const mongoose = require("mongoose");
 
 const getAllMovies = async (req, res) => {
   const moviesModel = mongoose.model("movies");
+  const moviesData = await moviesModel.find({});
 
-  try {
-    const moviesData = await moviesModel.find({});
-
-    res.status(200).json({
-      status: "success",
-      data: moviesData,
-    });
-  } catch (e) {
-    res.status(400).json({
-      status: "failed",
-      message: e.message,
-    });
-    return;
-  }
+  res.status(200).json({
+    status: "success",
+    data: moviesData,
+  });
 };
 
 module.exports = getAllMovies;
