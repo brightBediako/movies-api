@@ -3,13 +3,15 @@ const mongoose = require("mongoose");
 const addMovie = async (req, res) => {
   const moviesModel = mongoose.model("movies");
 
-  const { movie_name, info, rating, description } = req.body;
+  const { movie_name, description, genre, year, rating } = req.body;
 
   //validations...
 
   try {
     if (!movie_name) throw "Movie name is required!";
-    if (!info) throw "Info is required!!";
+    if (!description) throw "Description is required!!";
+    if (!genre) throw "Genre is required!!";
+    if (!year) throw "Year is required!!";
     if (!rating) throw "Rating is required!!";
     if (rating < 1 || rating > 10) throw "Rating must be between 1-10";
   } catch (e) {
@@ -24,12 +26,12 @@ const addMovie = async (req, res) => {
   try {
     const createdMovie = await moviesModel.create({
       movie_name: movie_name,
-      info: info,
-      rating: rating,
       description: description,
+      genre: genre,
+      year: year,
+      rating: rating,
     });
 
-    // console.log(createdMovie);
   } catch (e) {
     res.status(400).json({
       status: "failed",

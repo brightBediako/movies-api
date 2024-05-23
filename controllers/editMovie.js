@@ -3,7 +3,7 @@ const mongoose = require("mongoose");
 const editMovie = async (req, res) => {
   const moviesModel = mongoose.model("movies");
 
-  const { movie_id, movie_name, rating, info, description } = req.body;
+  const { movie_id, movie_name, description, genre, year, rating } = req.body;
 
   try {
     if (!movie_id) throw "Movie id is required!";
@@ -22,9 +22,10 @@ const editMovie = async (req, res) => {
       },
       {
         movie_name: movie_name,
-        rating: rating,
-        info: info,
         description: description,
+        genre: genre,
+        year: year,
+        rating: rating,
       },
       {
         runValidators: true,

@@ -5,15 +5,17 @@ const moviesSchema = new mongoose.Schema({
     type: String,
     required: [true, "Movie name is required!"],
   },
-  info: {
+  description: {
     type: String,
+  },
+  genre: {
+    type: String,
+  },
+  year: {
+    type: Number,
   },
   rating: {
     type: Number,
-  },
-
-  description: {
-    type: String,
   },
 });
 

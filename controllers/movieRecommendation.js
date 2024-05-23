@@ -3,9 +3,7 @@ const mongoose = require("mongoose");
 
 const movieRecommendation = async (req, res) => {
   const moviesModel = mongoose.model("movies");
-
   const allMovies = await moviesModel.find({});
-
   const moviesString = allMovies.map((el) => el.movie_name).join(",");
 
   const prompt = `I need a movie recommendation based on these movies : ${moviesString}. Provide me with 10 suggestions! seperate each movie with a comma`;
