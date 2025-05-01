@@ -1,4 +1,4 @@
-const { Configuration, OpenAIApi } = require("openai");
+const OpenAI = require("openai");
 const mongoose = require("mongoose");
 
 const movieRecommendation = async (req, res) => {
@@ -8,19 +8,19 @@ const movieRecommendation = async (req, res) => {
 
   const prompt = `I need a movie recommendation based on these movies : ${moviesString}. Provide me with 10 suggestions! seperate each movie with a comma`;
 
-  const configuration = new Configuration({
+
+  const openai = new OpenAI({
     apiKey: process.env.OPENAI_API_KEY,
   });
-  const openai = new OpenAIApi(configuration);
 
-  const completion = await openai.createCompletion({
-    model: "text-davinci-003",
+  const response = await openai.chat.completions.create({
+    model: "gpt-3.5-turbo-16k",
     prompt: prompt,
     max_tokens: 100,
   });
 
   res.status(200).json({
-    suggestions: completion.data.choices[0].text,
+    suggestions: response.data.choices[0].text,
   });
 
 };

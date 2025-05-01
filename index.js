@@ -28,6 +28,7 @@ require("./models/movies");
 
 // Routes...
 app.get("/movies/getRecommendation", movieRecommendation);
+
 app.post("/api/movies", addMovie);
 app.get("/api/movies", getAllMovies);
 app.get("/api/movies/:movie_id", getSingleMovie);
